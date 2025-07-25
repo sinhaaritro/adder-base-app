@@ -1,0 +1,32 @@
+name: Check Deno Code Validity
+
+# This workflow runs automatically every time you commit a change
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check:
+    # This job will run on a temporary virtual machine
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out your repository's code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up the Deno environment
+      - name: Setup Deno
+        uses: deno-land/setup-deno@v1
+        with:
+          deno-version: v1.x # Use the latest stable version
+
+      # Step 3: Check the code for any Deno-specific errors
+      # This command understands all of Deno's features.
+      - name: Verify Deno code
+        run: deno lint
+
+      # You can also add a type-checking step
+      - name: Type-check the code
+        run: deno check main.ts

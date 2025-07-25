@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adder Website</title>
+    <style>
+        :root {
+            --primary-color: #e53e3e; /* Red */
+            --background-color: #2d3748; /* Dark Gray-Blue */
+            --font-color: #edf2f7; /* Light Gray */
+            --card-color: #4a5568; /* Gray */
+        }
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--primary-color);
+            color: var(--font-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: var(--card-color);
+            padding: 2rem 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+        h1 {
+            margin-bottom: 0.5rem;
+        }
+        p {
+            color: #a0aec0; /* Lighter text for subtitle */
+            margin-top: 0;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+        .input-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 8px;
+            background-color: var(--background-color);
+            color: var(--font-color);
+            font-size: 1rem;
+        }
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 8px;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            filter: brightness(1.1);
+        }
+        #result {
+            margin-top: 2rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            min-height: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Adder</h1>
+        <!-- This text is injected by the server from an environment variable -->
+        <p>{{ welcome_text }}</p>
+        <div class="input-group">
+            <input type="number" id="num1" placeholder="First number">
+            <input type="number" id="num2" placeholder="Second number">
+        </div>
+        <button onclick="calculate()">Add Numbers</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculate() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            const resultDiv = document.getElementById('result');
+
+            if (isNaN(num1) || isNaN(num2)) {
+                resultDiv.innerText = 'Please enter valid numbers.';
+                return;
+            }
+
+            const sum = num1 + num2;
+            resultDiv.innerText = `Result: ${sum}`;
+        }
+    </script>
+</body>
+</html>
