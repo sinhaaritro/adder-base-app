@@ -1,36 +1,31 @@
 name: Check Deno Code Validity
 
-# This section defines when the workflow runs
 on:
-  # 1. This keeps the original behavior: run automatically on every push to main
   push:
     branches:
       - main
-  
-  # 2. This is the new line that adds the manual trigger
   workflow_dispatch:
 
 jobs:
   check:
-    # This job will run on a temporary virtual machine
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Check out your repository's code
+      # Step 1: Check out your repository's code using a specific major version
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Set up the Deno environment
+      # Step 2: Set up the Deno environment using a specific version number
+      # This is the key change to fix the error.
       - name: Setup Deno
-        uses: deno-land/setup-deno@v1
+        uses: denoland/setup-deno@v2
         with:
-          deno-version: v1.x # Use the latest stable version
+          deno-version: v2.x
 
       # Step 3: Check the code for any Deno-specific errors
-      # This command understands all of Deno's features.
       - name: Verify Deno code
         run: deno lint
 
-      # You can also add a type-checking step
+      # Step 4: Type-check the code
       - name: Type-check the code
         run: deno check main.ts
