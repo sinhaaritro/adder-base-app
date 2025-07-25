@@ -1,10 +1,14 @@
 name: Check Deno Code Validity
 
-# This workflow runs automatically every time you commit a change
+# This section defines when the workflow runs
 on:
+  # 1. This keeps the original behavior: run automatically on every push to main
   push:
     branches:
       - main
+  
+  # 2. This is the new line that adds the manual trigger
+  workflow_dispatch:
 
 jobs:
   check:
