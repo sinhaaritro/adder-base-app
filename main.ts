@@ -6,6 +6,7 @@ const PORT = 8000;
 
 console.log(`HTTP webserver running. Access it at: http://localhost:${PORT}/`);
 
+
 // The main handler function for incoming requests
 const handler = async (request: Request): Promise<Response> => {
   // Only respond to requests for the root path "/"
